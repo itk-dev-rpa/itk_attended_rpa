@@ -1,0 +1,20 @@
+[project]
+name = "itk-attended-rpa"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Mathias G", email = "ghbm@aarhus.dk" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "pyodbc>=5.3.0",
+    "requests>=2.32.5",
+]
+
+[project.scripts]
+itk-attended-rpa = "itk_attended_rpa:main"
+
+[build-system]
+requires = ["uv_build>=0.9.26,<0.10.0"]
+build-backend = "uv_build"
