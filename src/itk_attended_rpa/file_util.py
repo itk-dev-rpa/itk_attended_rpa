@@ -1,3 +1,5 @@
+"""This module is responsible for handling downloaded robots on the file system."""
+
 from pathlib import Path
 import hashlib
 from io import BytesIO
@@ -15,7 +17,7 @@ def download_robot(robot: Robot):
     the hash file is checked to see if the remote robot is different.
     """
     # Download robot data
-    response = requests.get(robot.location_url)
+    response = requests.get(robot.location_url, timeout=30)
     response.raise_for_status()
     robot_data = response.content
 
@@ -86,10 +88,10 @@ def get_robot_hash(robot: Robot) -> str | None:
     return hash_file.read_text()
 
 
-def save_hash_file(robot: Robot, hash: str):
+def save_hash_file(robot: Robot, hash_str: str):
     """Save the given hash to the robot's folder."""
     hash_file = get_hash_path(robot)
-    hash_file.write_text(hash)
+    hash_file.write_text(hash_str)
 
 
 def calculate_hash(data: bytes) -> str:

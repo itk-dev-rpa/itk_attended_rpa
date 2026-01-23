@@ -1,3 +1,4 @@
+"""This module is responsible for interactions with the constants table in the database."""
 
 from itk_attended_rpa.database import db_util
 

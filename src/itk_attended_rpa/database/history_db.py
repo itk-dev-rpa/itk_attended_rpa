@@ -1,3 +1,4 @@
+"""This module is responsible for interactions with the history table in the database."""
 
 import getpass
 import platform

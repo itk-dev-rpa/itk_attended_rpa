@@ -1,8 +1,11 @@
+"""This module contains common database functionality."""
+
 import os
 from tkinter.messagebox import showerror
 import re
 
 import pyodbc
+
 
 def get_connection() -> pyodbc.Connection:
     """Get a connection to the database."""
@@ -12,6 +15,7 @@ def get_connection() -> pyodbc.Connection:
 def get_conn_string() -> str | None:
     """Get the connection string from environment variables."""
     return os.getenv("itk_attended_rpa_conn_String")
+
 
 def try_connection():
     """Test the connection to the database and show any errors to the user."""

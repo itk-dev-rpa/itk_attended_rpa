@@ -24,3 +24,9 @@ dev = [
     "flake8>=7.3.0",
     "pylint>=4.0.4",
 ]
+
+[tool.pylint.messages_control]
+disable = [
+    "line-too-long",
+    "c-extension-no-member"
+]

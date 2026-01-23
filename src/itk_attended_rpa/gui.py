@@ -1,3 +1,5 @@
+"""This is the main module of the application which shows the gui."""
+
 import json
 import tkinter as tk
 from tkinter import ttk
@@ -11,8 +13,13 @@ from itk_attended_rpa import file_util
 
 
 class App(tk.Tk):
+    """The main application."""
     def __init__(self):
         super().__init__()
+
+        self.process = None
+        self.popup = None
+
         self.title("ITK Attended RPA")
 
         tk.Label(self, text="Velkommen til ITK Attended RPA").pack()
@@ -62,7 +69,7 @@ class App(tk.Tk):
         constants_str = json.dumps(constants_dict, ensure_ascii=False)
 
         cmd = ["python", main_file, constants_str]
-        self.process = subprocess.Popen(cmd)
+        self.process = subprocess.Popen(cmd)  # pylint: disable=consider-using-with
         threading.Thread(target=self.monitor_process, daemon=True).start()
 
     def show_process_popup(self, robot_name: str):
@@ -117,6 +124,7 @@ class App(tk.Tk):
 
 
 def main():
+    """The main entry point for the cli command 'itk-attended-rpa'"""
     if not db_util.get_conn_string():
         showinfo("Fejl", "'itk_attended_rpa_conn_String' er ikke sat i miljøvariabler.")
     else:
