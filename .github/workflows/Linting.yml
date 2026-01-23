@@ -24,8 +24,8 @@ jobs:
 
     - name: Analyzing the code with pylint
       run: |
-        pylint src
+        uv run pylint src
 
     - name: Analyzing the code with flake8
       run: |
-        flake8 --extend-ignore=E501,E251 src
+        uv run flake8 --extend-ignore=E501,E251 src
