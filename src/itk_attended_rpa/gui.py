@@ -3,7 +3,7 @@
 import json
 import tkinter as tk
 from tkinter import ttk
-from tkinter.messagebox import showinfo
+from tkinter import messagebox
 import webbrowser
 import subprocess
 import threading
@@ -54,7 +54,7 @@ class App(tk.Tk):
         if robot.readme_url:
             webbrowser.open(robot.readme_url)
         else:
-            showinfo("Ingen readme", "Denne robot ser ikke ud til at have en vejledning.")
+            messagebox.showinfo("Ingen readme", "Denne robot ser ikke ud til at have en vejledning.")
 
     def run_robot(self):
         """Run the selected robot."""
@@ -107,9 +107,13 @@ class App(tk.Tk):
         """Monitor the robot process and close blocking
         popup when done.
         """
-        self.process.wait()
+        return_code = self.process.wait()
         self.after(0, self.close_popup)
-        showinfo("Færdig", "Robotten er færdig.")
+
+        if return_code == 0:
+            messagebox.showinfo("Færdig", f"Robotten er færdig.")
+        else:
+            messagebox.showerror("Fejl", "Robotten stoppede uventet.")
 
     def close_popup(self):
         """Close the process popup."""
@@ -126,7 +130,7 @@ class App(tk.Tk):
 def main():
     """The main entry point for the cli command 'itk-attended-rpa'"""
     if not db_util.get_conn_string():
-        showinfo("Fejl", "'itk_attended_rpa_conn_String' er ikke sat i miljøvariabler.")
+        messagebox.showerror("Fejl", "'itk_attended_rpa_conn_String' er ikke sat i miljøvariabler.")
     else:
         db_util.try_connection()
         App()
