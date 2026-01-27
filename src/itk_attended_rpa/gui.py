@@ -111,7 +111,7 @@ class App(tk.Tk):
         self.after(0, self.close_popup)
 
         if return_code == 0:
-            messagebox.showinfo("Færdig", f"Robotten er færdig.")
+            messagebox.showinfo("Færdig", "Robotten er færdig.")
         else:
             messagebox.showerror("Fejl", "Robotten stoppede uventet.")
 
