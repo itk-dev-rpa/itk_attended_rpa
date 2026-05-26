@@ -59,3 +59,23 @@ The database contains 3 tables:
   - __readme_url__: A link to the robot's readme.
 - __constants__: A list of name/value constants that will be passed to all robots as a json string.
 - __history__: A list of historical robot activations.
+
+## For developers
+
+The application will download the files at the robot's location URL and place them in `~/itk_attended_rpa/<robot name>`.
+If the downloaded file is a zip-file it will be unpacked automatically.
+
+A hash of the downloaded files are stored to avoid recreation of existing robots. This allows
+local virtual environments to be reused if wanted.
+Beware that a new version of the robot will cause the application to completely
+remove any old files in the robot's folder before the new version is downloaded.
+
+When you want to run a robot from this application it will look for a `**/main.py` file in the
+robot's repo and run it like this `python main.py <constants json string>`.
+
+### Download url
+
+If you're using Github you can use the 'Download Zip' button for the download URL.
+Right click the button and select 'Copy link address'.
+
+![Download Zip Github](image-2.png)
